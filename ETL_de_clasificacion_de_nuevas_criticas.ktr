@@ -439,7 +439,7 @@
   <order>
     <hop>
       <from>Filtrar llamadas exitosas</from>
-      <to>Obtener respuestas</to>
+      <to>Obtener los campos respuesta</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -463,13 +463,13 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Obtener respuestas</from>
+      <from>Obtener los campos respuesta</from>
       <to>Seleccionar campos finales</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Filtrar llamadas exitosas</from>
-      <to>Write to log</to>
+      <to>Escribir en el Log las llamadas no exitosas</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -536,8 +536,8 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <send_true_to>Obtener respuestas</send_true_to>
-    <send_false_to>Write to log</send_false_to>
+    <send_true_to>Obtener los campos respuesta</send_true_to>
+    <send_false_to>Escribir en el Log las llamadas no exitosas</send_false_to>
     <compare>
       <condition>
         <negated>N</negated>
@@ -703,7 +703,7 @@
     </GUI>
   </step>
   <step>
-    <name>Obtener respuestas</name>
+    <name>Obtener los campos respuesta</name>
     <type>JsonInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -882,7 +882,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
     </GUI>
   </step>
   <step>
-    <name>Write to log</name>
+    <name>Escribir en el Log las llamadas no exitosas</name>
     <type>WriteToLog</type>
     <description/>
     <distribute>Y</distribute>
@@ -896,9 +896,21 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
     <displayHeader>Y</displayHeader>
     <limitRows>N</limitRows>
     <limitRowsNumber>0</limitRowsNumber>
-    <logmessage/>
+    <logmessage>Llamadas no exitosas:</logmessage>
     <fields>
-      </fields>
+      <field>
+        <name>Review</name>
+      </field>
+      <field>
+        <name>jsonPayload</name>
+      </field>
+      <field>
+        <name>jsonResponse</name>
+      </field>
+      <field>
+        <name>httpStatus</name>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
